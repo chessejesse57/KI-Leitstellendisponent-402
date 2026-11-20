@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "Feedback": {
+      "title": "Feedback",
+      "description": "Notruf-Auswertung und Feedback für Jugend forscht",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Eindeutige ID des Feedbacks"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Erstellungszeitpunkt im ISO-Format"
+        },
+        "stichwort": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Einsatzstichwort (z. B. BR-012 Gebäudebrand Schule)"
+        },
+        "einsatzort": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Erfasster Notfallort in Kiel"
+        },
+        "durationSeconds": {
+          "type": "number",
+          "description": "Gesprächsdauer in Sekunden"
+        },
+        "overallRating": {
+          "type": "string",
+          "enum": ["gut", "verbesserung"],
+          "description": "Gesamteinschätzung"
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 5000,
+          "description": "Eigene Bewertung und Notizen des Nutzers"
+        }
+      },
+      "required": ["id", "overallRating", "comment"]
+    }
+  },
+  "firestore": {
+    "/feedbacks/{feedbackId}": {
+      "schema": "Feedback",
+      "description": "Zentrale Speicherung aller Notruf-Auswertungen für geräteübergreifenden Zugriff"
+    }
+  }
+}
